@@ -1,4 +1,5 @@
 #Project: Screen Diff Example
+
 ##Technologies:
 - Java
 - Maven
