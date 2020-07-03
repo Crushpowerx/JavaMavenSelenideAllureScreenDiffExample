@@ -1,5 +1,5 @@
 #Project: Screen Diff Example
-#Technologies:
+##Technologies:
 - Java
 - Maven
 - Selenide
