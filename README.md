@@ -8,7 +8,7 @@
 - Screen Diff Plugin
 ##Follow the link and read the documentation to get Allure:
 - https://github.com/allure-framework/allure2
-## Run tests with command:
+##Run tests with command:
 ```
 mvn clean test
 ```
