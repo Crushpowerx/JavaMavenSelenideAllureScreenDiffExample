@@ -6,6 +6,15 @@
 - TestNG
 - Allure
 - Screen Diff Plugin
+ 
+### Show diff view
+
+![Show Diff View](img/show-diff.png)
+
+### Show overlay view
+
+![Show Overlay View](img/show-overlay.gif)
+
 ## Follow the link and read the documentation to get Allure:
 - https://github.com/allure-framework/allure2
 ## Run tests with command:
