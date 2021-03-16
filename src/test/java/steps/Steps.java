@@ -29,7 +29,7 @@ public class Steps {
     }
 
     public static void makeImageDiff(String expectedName) throws IOException {
-// объявляем переменные
+        // объявляем переменные
         String expectedPath = "target/";
         String screenPath = "target/";
         String actualName = "actual.png";
@@ -37,37 +37,44 @@ public class Steps {
         String fullPathNameExpected = expectedPath + expectedName + ".png";
         String fullPathNameActual = screenPath + actualName;
         String fullPathNameDiff = screenPath + diffName;
-// активируем плагин аллюра для дифф
+
+        // активируем плагин аллюра для дифф
         Allure.label("testType", "screenshotDiff");
-// делаем скриншот
+
+        // делаем скриншот
         Screenshot actual = new AShot()
                 .coordsProvider(new WebDriverCoordsProvider())
                 .takeScreenshot(getWebDriver());
         ImageIO.write(actual.getImage(), "png", new File(fullPathNameActual));
-// сравниваем его с примером и сохраняем дифф
+
+        // сравниваем его с примером и сохраняем дифф
         Screenshot expected = new Screenshot(ImageIO.read(new File(fullPathNameExpected)));
         ImageDiff diff = new ImageDiffer().makeDiff(actual, expected);
         BufferedImage diffImage = diff.getMarkedImage();
         ImageIO.write(diffImage, "png", new File(fullPathNameDiff));
-// прикрепляем дифф в аллюр отчёт
+
+        // прикрепляем дифф в аллюр отчёт
         BufferedImage bImage1 = ImageIO.read(new File(fullPathNameDiff));
         ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
         ImageIO.write(bImage1, "png", bos1);
         byte[] data1 = bos1.toByteArray();
         Allure.addAttachment("diff", new ByteArrayInputStream(data1));
-// прикрепляем фактичесский скриншот в аллюр отчёт
+
+        // прикрепляем фактичесский скриншот в аллюр отчёт
         BufferedImage bImage2 = ImageIO.read(new File(fullPathNameActual));
         ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
         ImageIO.write(bImage2, "png", bos2);
         byte[] data2 = bos2.toByteArray();
         Allure.addAttachment("actual", new ByteArrayInputStream(data2));
-// прикрепляем скриншот-пример в аллюр отчёт
+
+        // прикрепляем скриншот-пример в аллюр отчёт
         BufferedImage bImage3 = ImageIO.read(new File(fullPathNameExpected));
         ByteArrayOutputStream bos3 = new ByteArrayOutputStream();
         ImageIO.write(bImage3, "png", bos3);
         byte[] data3 = bos3.toByteArray();
         Allure.addAttachment("expected", new ByteArrayInputStream(data3));
-// фейлим тест, если при сравнение разница в пикселях больше допустимой
+
+        // фейлим тест, если при сравнение разница в пикселях больше допустимой
         Assert.assertEquals(diff.getDiffSize(), 0);
     }
 
