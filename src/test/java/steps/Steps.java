@@ -1,6 +1,7 @@
 package steps;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -19,6 +20,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class Steps {
 
+    @Step
     public static void makeScreenshotExample(String expectedName) throws IOException {
         String expectedPath = "target/";
         String pathname = expectedPath + expectedName + ".png";
@@ -28,6 +30,7 @@ public class Steps {
         ImageIO.write(actual.getImage(), "png", new File(pathname));
     }
 
+    @Step
     public static void makeImageDiff(String expectedName) throws IOException {
         // объявляем переменные
         String expectedPath = "target/";
